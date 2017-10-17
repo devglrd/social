@@ -75,6 +75,9 @@
                                     <constraint firstAttribute="width" constant="200" id="OHz-NY-fVP"/>
                                 </constraints>
                                 <state key="normal" image="facebook-icon-preview-200x200"/>
+                                <connections>
+                                    <action selector="FbBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tm6-LF-YDI"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="AnM-II-zXZ">
                                 <rect key="frame" x="77" y="362" width="220" height="158"/>
