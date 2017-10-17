@@ -98,7 +98,7 @@
                                         </constraints>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfh-S9-yqd" customClass="RoundBtn" customModule="social" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="118" width="220" height="40"/>
@@ -109,6 +109,9 @@
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" red="0.59999999999999998" green="0.0" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SignInBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbe-1y-Yca"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -145,6 +148,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="emailFld" destination="U1U-sA-6F7" id="IJw-7w-h3x"/>
+                        <outlet property="passwordFld" destination="U0W-oh-Bzg" id="qq3-U1-qME"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
