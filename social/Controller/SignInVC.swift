@@ -12,6 +12,8 @@ import FBSDKCoreKit
 import Firebase
 class SignInVC: UIViewController {
 
+    var dict : [String: Any]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -23,8 +25,8 @@ class SignInVC: UIViewController {
     }
 
 
-    @IBAction func FbBtnTapped(_ sender: Any) {
-        let fbLogin = FBSDKLoginManager()
+    @IBAction func FbBtnTapped(sender: Any) {
+        /*let fbLogin = FBSDKLoginManager()
         
         fbLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             if error != nil{
@@ -36,9 +38,36 @@ class SignInVC: UIViewController {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 self.firebaseAuthenticate(credential)
             }
+        }*/
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if fbloginresult.grantedPermissions != nil {
+                    if(fbloginresult.grantedPermissions.contains("email"))
+                    {
+                        self.getFBUserData()
+                        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                        self.firebaseAuthenticate(credential)
+                        fbLoginManager.logOut()
+                    }
+                }
+            }
         }
-
     }
+    
+    func getFBUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    self.dict = result as! [String : AnyObject]
+                    print(result!)
+                    print(self.dict)
+                }
+            })
+        }
+    }
+    
     func firebaseAuthenticate(_ credential: AuthCredential){
         Auth.auth().signIn(with: credential, completion: { (user, error) in
             if error != nil{
